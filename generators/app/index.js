@@ -1,7 +1,6 @@
 'use strict';
 var yeoman = require('yeoman-generator');
-var chalk = require('chalk');
-var caseCamel = require('case-camel');
+var decamelize = require('decamelize');
 var path = require('path');
 
 module.exports = yeoman.generators.Base.extend({
@@ -24,8 +23,8 @@ module.exports = yeoman.generators.Base.extend({
       var camelName = props.camelName;
       var firstChar = props.camelName.charAt(0);
       var constructor = firstChar === firstChar.toUpperCase();
-      var instanceName = firstChar.toLowerCase() + camelName.slice(1);
-      var uncamelName = caseCamel.parse(camelName).join('-');
+      var instanceName = firstChar.toLowerCase() + camelName.substr(1);
+      var uncamelName = decamelize(camelName, '-');
       var libPath, testPath, requirePath;
 
       if (!/[\\\/]$/.test(props.dir)) {
