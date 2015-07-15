@@ -28,27 +28,24 @@ module.exports = yeoman.generators.Base.extend({
       var uncamelName = caseCamel.parse(camelName).join('-');
       var libPath, testPath, requirePath;
 
+      if (!/[\\\/]$/.test(props.dir)) {
+        props.dir += path.sep;
+      }
 
-      if (props.dir === 'lib') {
-        libPath = 'lib' + path.sep + uncamelName + '.js';
-        testPath = 'test' + path.sep + uncamelName + '-test.js';
+      libPath = props.dir + path.sep + uncamelName + '.js';
+      if (/^lib[\\\/]/.test(props.dir)) {
+        testPath = 'test' + props.dir.substr(3) + uncamelName + '-test.js';
       } else {
-        var start = 'lib' + path.sep;
-        libPath = props.dir + path.sep + uncamelName + '.js';
-        if (props.dir.indexOf(start) === 0) {
-          testPath = 'test' + props.dir.substr(3) + path.sep + uncamelName + '-test.js';
-        } else {
-          testPath = 'test' + path.sep + props.dir + path.sep + uncamelName + '-test.js';
-        }
+        testPath = 'test' + path.sep + props.dir +  uncamelName + '-test.js';
       }
 
       requirePath = path.relative(path.dirname(testPath), libPath);
 
+      this.libPath = libPath;
+      this.testPath = testPath;
       this.templateContext = {
         camelName: camelName,
         uncamelName: uncamelName,
-        libPath: libPath,
-        testPath: testPath,
         requirePath: requirePath,
         constructor: constructor,
         instanceName: instanceName
@@ -63,12 +60,12 @@ module.exports = yeoman.generators.Base.extend({
     app: function () {
       this.fs.copyTpl(
         this.templatePath('test.js'),
-        this.destinationPath(this.templateContext.testPath),
+        this.destinationPath(this.testPath),
         this.templateContext
       );
       this.fs.copyTpl(
         this.templatePath('lib.js'),
-        this.destinationPath(this.templateContext.libPath),
+        this.destinationPath(this.libPath),
         this.templateContext
       );
     }

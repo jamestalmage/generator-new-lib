@@ -37,7 +37,7 @@ describe('new-lib:app', function () {
   });
 
   it('in sub-lib folder', function(done) {
-    run({dir:'lib/sublib', camelName:'subLibModule'}, function() {
+    run({dir:'lib/sublib/', camelName:'subLibModule'}, function() {
       assert.file([
         'lib/sublib/sub-lib-module.js',
         'test/sublib/sub-lib-module-test.js'
@@ -67,7 +67,7 @@ describe('new-lib:app', function () {
   });
 
   it('constructor', function(done) {
-    run({dir:'lib', camelName:'MyConstructor'}, function() {
+    run({dir:'lib/', camelName:'MyConstructor'}, function() {
       assert.file([
         'lib/my-constructor.js',
         'test/my-constructor-test.js'
