@@ -1,46 +1,43 @@
 # generator-new-lib [![Build Status](https://secure.travis-ci.org/jamestalmage/generator-new-lib.png?branch=master)](https://travis-ci.org/jamestalmage/generator-new-lib)
 
-> [Yeoman](http://yeoman.io) generator
+> [Yeoman](http://yeoman.io) generator for adding a new module to your project 
+> (i.e. in the `lib` dir)
 
 
 ## Getting Started
 
-### What is Yeoman?
-
-Trick question. It's not a thing. It's this guy:
-
-![](http://i.imgur.com/JHaAlBJ.png)
-
-Basically, he wears a top hat, lives in your computer, and waits for you to tell him what kind of application you wish to create.
-
-Not every new computer comes with a Yeoman pre-installed. He lives in the [npm](https://npmjs.org) package repository. You only have to ask for him once, then he packs up and moves into your hard drive. *Make sure you clean up, he likes new and shiny things.*
-
 ```bash
 npm install -g yo
-```
-
-### Yeoman Generators
-
-Yeoman travels light. He didn't pack any generators when he moved in. You can think of a generator like a plug-in. You get to choose what type of application you wish to create, such as a Backbone application or even a Chrome extension.
-
-To install generator-new-lib from npm, run:
-
-```bash
 npm install -g generator-new-lib
+yo new-lib
+
+? What is the Module name? myModule
+? What subdirectory? (lib) lib 
 ```
 
-Finally, initiate the generator:
-
-```bash
-yo new-lib
+Creates two files `lib/my-module.js`, and `test/my-module-test.js`.
+  Note how the file names have been converted from the camel case above.
+The test file will be setup as a Mocha/Jasmine test, 
+  and already have the appropriate require statement for the lib module.
+If you supply a capitalized module name (`MyModule`), 
+  it will assume the module returns a constructor and add an instance instantiation to the test:
+  
+```js
+describe('my-module', function() {
+  var assert = require('assert');
+  var MyModule = require('../lib/my-module.js');
+  
+  // and if it's a constructor, the following is also added                  
+  var myModule;
+  beforeEach(function() {
+    myModule = new MyModule();
+  });
+});
 ```
 
 ### Getting To Know Yeoman
 
-Yeoman has a heart of gold. He's a person with feelings and opinions, but he's very easy to work with. If you think he's too opinionated, he can be easily convinced.
-
-If you'd like to get to know Yeoman better and meet some of his friends, [Grunt](http://gruntjs.com) and [Bower](http://bower.io), check out the complete [Getting Started Guide](https://github.com/yeoman/yeoman/wiki/Getting-Started).
-
+Check out the [Getting Started Guide](https://github.com/yeoman/yeoman/wiki/Getting-Started).
 
 ## License
 
