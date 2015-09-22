@@ -25,6 +25,18 @@ describe('new-lib:app', function () {
     });
   });
 
+  it('in lib folder (not using camelcase)', function (done) {
+    run({ dir: 'lib', camelName:'my-module' }, function() {
+      assert.file([
+        'lib/my-module.js',
+        'test/my-module-test.js'
+      ]);
+      assert.fileContent('test/my-module-test.js', "require('../lib/my-module.js')");
+      assert.fileContent('lib/my-module.js', "module.exports = myModule");
+      done();
+    });
+  });
+
   it('in root folder', function (done) {
     run({ dir: '.', camelName:'rootModule' }, function() {
       assert.file([

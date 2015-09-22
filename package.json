@@ -20,6 +20,7 @@
   ],
   "dependencies": {
     "decamelize": "^1.0.0",
+    "underscore.string": "^3.2.2",
     "yeoman-generator": "^0.20.1"
   },
   "devDependencies": {

@@ -2,6 +2,7 @@
 var yeoman = require('yeoman-generator');
 var decamelize = require('decamelize');
 var path = require('path');
+var _s = require('underscore.string');
 
 module.exports = yeoman.generators.Base.extend({
   prompting: function () {
@@ -20,7 +21,7 @@ module.exports = yeoman.generators.Base.extend({
     ];
 
     this.prompt(prompts, function (props) {
-      var camelName = props.camelName;
+      var camelName = _s.camelize(props.camelName);
       var firstChar = props.camelName.charAt(0);
       var constructor = firstChar === firstChar.toUpperCase();
       var instanceName = firstChar.toLowerCase() + camelName.substr(1);
