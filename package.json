@@ -1,6 +1,6 @@
 {
   "name": "generator-new-lib",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Yeoman generator for adding a new module to your project",
   "license": "MIT",
   "repository": "jamestalmage/generator-new-lib",
