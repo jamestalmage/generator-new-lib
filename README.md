@@ -35,6 +35,11 @@ describe('my-module', function() {
 });
 ```
 
+## new-lib:test generator
+
+Scans your `lib` folder for files that do not have matching files in the `test` folder.
+Lets you pick which files to generate tests for.
+
 ### Getting To Know Yeoman
 
 Check out the [Getting Started Guide](https://github.com/yeoman/yeoman/wiki/Getting-Started).
