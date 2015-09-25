@@ -19,7 +19,9 @@
     "yeoman-generator"
   ],
   "dependencies": {
+    "async": "^1.4.2",
     "decamelize": "^1.0.0",
+    "glob": "^5.0.14",
     "underscore.string": "^3.2.2",
     "yeoman-generator": "^0.20.1"
   },
