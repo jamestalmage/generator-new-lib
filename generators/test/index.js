@@ -35,7 +35,7 @@ module.exports = yeoman.generators.Base.extend({
       var libFiles = result[0];
       var testFiles = result[1];
 
-      var untestedLibs = libFiles.filter(hasTest);
+      var untestedLibs = libFiles.filter(hasTest).map(prefixWithLib);
 
       self.prompt(
         [
@@ -51,6 +51,10 @@ module.exports = yeoman.generators.Base.extend({
           done();
         }
       );
+
+      function prefixWithLib(file) {
+        return path.join('lib', file);
+      }
 
       function hasTest(file) {
         var suffixedFile = file.replace(/\.js$/, '-test.js');
@@ -74,7 +78,7 @@ module.exports = yeoman.generators.Base.extend({
   writing: {
     app: function () {
       this.filesToTest.forEach(function (file) {
-        var testFile = 'test/' + file.replace(/\.js$/, '-test.js');
+        var testFile = 'test/' + file.replace(/^lib\//, '').replace(/\.js$/, '-test.js');
         var requirePath = path.relative(path.dirname(testFile), file);
         var uncamelName = path.basename(file, '.js');
         var camelName = _s.camelize(uncamelName);
